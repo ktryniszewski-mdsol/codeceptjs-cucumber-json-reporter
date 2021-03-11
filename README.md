@@ -25,7 +25,7 @@ plugins: {
       enabled: true,
       attachScreenshots: true,       // true by default
       attachComments: true,          // true by default
-      outputFile: file.json,         // cucumber_output.json by default
+      outputFile: 'file.json',       // cucumber_output.json by default
     },
 }
 ...
