@@ -22,10 +22,10 @@ npm i codeceptjs-cucumber-json-reporter
 plugins: {
     cucumberJsonReporter: {
       require: 'codeceptjs-cucumber-json-reporter',
-      enabled: true,
-      attachScreenshots: true,       // true by default
-      attachComments: true,          // true by default
-      outputFile: 'file.json',       // cucumber_output.json by default
+      enabled: true,               // if false, pass --plugins cucumberJsonReporter
+      attachScreenshots: true,     // true by default
+      attachComments: true,        // true by default
+      outputFile: 'file.json',     // cucumber_output.json by default
     },
 }
 ...
@@ -34,7 +34,10 @@ plugins: {
 ---
 ## Usage
 
-When the plugin is enabled, run your test as you normally would (parallelized runs not tested).
+When the plugin is installed and configured, run it as you would normally run any other CodeceptJS plugin:
+```
+npx codeceptjs run --plugins cucumberReporter
+```
 
 The plugin parses the BDD feature file before the start of each feature and generates the report structure. Once the test starts, it uses event listeners to add runtime data such as step status (pass/fail), screenshot embeddings, comment embeddings, and errors.
 
