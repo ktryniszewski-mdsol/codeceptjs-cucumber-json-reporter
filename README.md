@@ -23,9 +23,9 @@ plugins: {
     cucumberJsonReporter: {
       require: 'codeceptjs-cucumber-json-reporter',
       enabled: true,
-      attachScreenshots: true,         // true by default
-      attachComments: true,            // true by default
-      outputFilename: file.json,       // cucumber_output.json by default
+      attachScreenshots: true,       // true by default
+      attachComments: true,          // true by default
+      outputFile: file.json,         // cucumber_output.json by default
     },
 }
 ...
