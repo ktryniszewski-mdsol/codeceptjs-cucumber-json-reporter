@@ -16,7 +16,16 @@ const report = {
   stepPosition: 0,
 };
 
-module.exports = function () {
+const defaultConfig = {
+  attachScreenshots: true,
+  attachComments: true,
+  outputFile: 'cucumber_output.json',
+};
+
+module.exports = function (config) {
+  // eslint-disable-next-line no-param-reassign
+  config = Object.assign(defaultConfig, config);
+
   // Before suite starts, parse the feature file and set report feature position
   event.dispatcher.on(event.suite.before, (suite) => {
     const feature = buildReportFeature(suite);
@@ -88,7 +97,7 @@ module.exports = function () {
     // since we parse the whole feature file at start
     removeNotExecutedScenarios();
 
-    fs.writeFile(`${output_dir}${path.sep}cucumber_output.json`, JSON.stringify(allFeatures, null, 2), (err) => {
+    fs.writeFile(path.join(global.output_dir, config.outputFile), JSON.stringify(allFeatures, null, 2), (err) => {
       if (err) throw err;
     });
   });
@@ -307,7 +316,8 @@ module.exports = function () {
   }
 
   function addScreenshotToReport(step) {
-    const filename = `${output_dir}${path.sep}${step.args[0]}`;
+    if (!config.attachScreenshots) return;
+    const filename = path.join(global.output_dir, step.args[0]);
     try {
       const convertedImg = base64Img.base64Sync(filename).split(',')[1];
       const screenshot = {
@@ -322,6 +332,7 @@ module.exports = function () {
   }
 
   function addCommentToReport(step) {
+    if (!config.attachComments) return;
     const comment = {
       data: btoa(step),
       mime_type: 'text/plain',
