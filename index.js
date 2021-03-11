@@ -139,7 +139,7 @@ module.exports = function (config) {
 
   function buildReportScenarios(feature) {
     let allScenarios = [];
-    let backgroundSteps = null;
+    let backgroundSteps = [];
 
     // get all scenarios
     feature.children.forEach((codeceptScenarioObject) => {
