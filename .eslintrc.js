@@ -1,0 +1,36 @@
+module.exports = {
+  env: {
+    commonjs: true,
+    es6: true,
+    node: true,
+  },
+  extends: [
+    'airbnb-base',
+  ],
+  globals: {
+    Given: 'readonly',
+    When: 'readonly',
+    Then: 'readonly',
+    Before: 'readonly',
+    After: 'readonly',
+    inject: 'readonly',
+    codeceptjs: 'readonly',
+    codecept_helper: 'readonly',
+    output_dir: 'readonly',
+    pause: 'readonly',
+    Feature: 'readonly',
+    Scenario: 'readonly',
+    locate: 'readonly',
+    within: 'readonly',
+    Atomics: 'readonly',
+    SharedArrayBuffer: 'readonly',
+  },
+  parser: 'babel-eslint',
+  rules: {
+    'no-await-in-loop': 0,
+    'no-plusplus': 0,
+    'max-len': ['error', { code: 120 }],
+    'no-underscore-dangle': 0,
+    'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
+  },
+};

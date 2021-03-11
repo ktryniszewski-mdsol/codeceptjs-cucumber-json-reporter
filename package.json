@@ -1,0 +1,37 @@
+{
+  "name": "codeceptjs-cucumber-json-reporter",
+  "version": "1.0.0",
+  "description": "CodeceptJS plugin to generate a cucumberjs json output",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "ktryniszewski-mdsol",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ktryniszewski-mdsol/codeceptjs-cucumber-json-reporter.git"
+  },
+  "keywords": [
+    "codeceptjs",
+    "cucumber",
+    "reporter"
+  ],
+  "bugs": {
+    "url": "https://github.com/ktryniszewski-mdsol/codeceptjs-cucumber-json-reporter/issues"
+  },
+  "homepage": "https://github.com/ktryniszewski-mdsol/codeceptjs-cucumber-json-reporter#readme",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-eslint": "^10.1.0",
+    "eslint": "^7.16.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.22.1",
+    "playwright": "^1.9.2"
+  },
+  "dependencies": {
+    "base64-img": "^1.0.4",
+    "btoa": "^1.2.1",
+    "codeceptjs": "^3.0.5",
+    "lodash": "^4.17.21"
+  }
+}
