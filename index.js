@@ -20,6 +20,7 @@ const defaultConfig = {
   attachScreenshots: true,
   attachComments: true,
   outputFile: 'cucumber_output.json',
+  uniqueFileNames: false
 };
 
 module.exports = function (config) {
@@ -96,8 +97,10 @@ module.exports = function (config) {
     // remove scenarios that weren't run
     // since we parse the whole feature file at start
     removeNotExecutedScenarios();
+    
+    const filename = config.uniqueFileNames ? `cucumber_output_${Math.floor(new Date().getTime() / 1000)}.json` : config.outputFile
 
-    fs.writeFile(path.join(global.output_dir, config.outputFile), JSON.stringify(allFeatures, null, 2), (err) => {
+    fs.writeFile(path.join(global.output_dir, filename), JSON.stringify(allFeatures, null, 2), (err) => {
       if (err) throw err;
     });
   });
