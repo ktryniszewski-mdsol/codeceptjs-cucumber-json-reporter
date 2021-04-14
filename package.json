@@ -28,7 +28,6 @@
     "eslint-plugin-import": "^2.22.1"
   },
   "dependencies": {
-    "base64-img": "^1.0.4",
     "btoa": "^1.2.1",
     "lodash": "^4.17.21"
   }
