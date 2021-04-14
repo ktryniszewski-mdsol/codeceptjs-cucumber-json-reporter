@@ -3,7 +3,6 @@
 
 const { event, output, recorder } = require('codeceptjs');
 const fs = require('fs');
-const base64Img = require('base64-img');
 const path = require('path');
 const _ = require('lodash');
 const btoa = require('btoa');
@@ -20,6 +19,7 @@ const defaultConfig = {
   attachScreenshots: true,
   attachComments: true,
   outputFile: 'cucumber_output.json',
+  uniqueFileNames: false,
 };
 
 module.exports = function (config) {
@@ -97,7 +97,9 @@ module.exports = function (config) {
     // since we parse the whole feature file at start
     removeNotExecutedScenarios();
 
-    fs.writeFile(path.join(global.output_dir, config.outputFile), JSON.stringify(allFeatures, null, 2), (err) => {
+    const filename = config.uniqueFileNames ? `cucumber_output_${Math.floor(new Date().getTime() / 1000)}.json` : config.outputFile;
+
+    fs.writeFile(path.join(global.output_dir, filename), JSON.stringify(allFeatures, null, 2), (err) => {
       if (err) throw err;
     });
   });
@@ -319,7 +321,7 @@ module.exports = function (config) {
     if (!config.attachScreenshots) return;
     const filename = path.join(global.output_dir, step.args[0]);
     try {
-      const convertedImg = base64Img.base64Sync(filename).split(',')[1];
+      const convertedImg = fs.readFileSync(filename, 'base64');
       const screenshot = {
         data: convertedImg,
         mime_type: 'image/png',
