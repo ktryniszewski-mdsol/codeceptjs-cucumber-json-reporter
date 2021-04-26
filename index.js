@@ -25,6 +25,11 @@ const defaultConfig = {
 module.exports = function (config) {
   // eslint-disable-next-line no-param-reassign
   config = Object.assign(defaultConfig, config);
+  const plugin = {};
+
+  plugin.addScreenshot = (step, file_path) => {
+    addScreenshotToReport(step, file_path);
+  };
 
   // Before suite starts, parse the feature file and set report feature position
   event.dispatcher.on(event.suite.before, (suite) => {
@@ -317,9 +322,9 @@ module.exports = function (config) {
     return bddCheck;
   }
 
-  function addScreenshotToReport(step) {
+  function addScreenshotToReport(step, file_path) {
     if (!config.attachScreenshots) return;
-    const filename = path.join(global.output_dir, step.args[0]);
+    const filename = file_path || path.join(global.output_dir, step.args[0]);
     try {
       const convertedImg = fs.readFileSync(filename, 'base64');
       const screenshot = {
@@ -342,4 +347,6 @@ module.exports = function (config) {
     output.log(`[CucumberJsonReporter] Adding comment "${step}" to:\n ${JSON.stringify(report.step)}`);
     report.step.embeddings.push(comment);
   }
+
+  return plugin;
 };
