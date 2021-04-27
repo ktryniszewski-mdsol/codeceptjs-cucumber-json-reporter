@@ -25,6 +25,11 @@ const defaultConfig = {
 module.exports = function (config) {
   // eslint-disable-next-line no-param-reassign
   config = Object.assign(defaultConfig, config);
+  const plugin = {};
+
+  plugin.addScreenshot = (file_path) => {
+    addScreenshotToReport(file_path);
+  };
 
   // Before suite starts, parse the feature file and set report feature position
   event.dispatcher.on(event.suite.before, (suite) => {
@@ -68,7 +73,10 @@ module.exports = function (config) {
   });
 
   event.dispatcher.on(event.step.finished, (step) => {
-    if (step.helperMethod === 'saveScreenshot') addScreenshotToReport(step);
+    if (step.helperMethod === 'saveScreenshot') {
+      const filePath = path.join(global.output_dir, step.args[0]);
+      addScreenshotToReport(filePath);
+    }
   });
 
   event.dispatcher.on(event.step.comment, (step) => {
@@ -317,19 +325,18 @@ module.exports = function (config) {
     return bddCheck;
   }
 
-  function addScreenshotToReport(step) {
+  function addScreenshotToReport(file_path) {
     if (!config.attachScreenshots) return;
-    const filename = path.join(global.output_dir, step.args[0]);
     try {
-      const convertedImg = fs.readFileSync(filename, 'base64');
+      const convertedImg = fs.readFileSync(file_path, 'base64');
       const screenshot = {
         data: convertedImg,
         mime_type: 'image/png',
       };
-      output.log(`[CucumberJsonReporter] Adding ${filename} to:\n ${JSON.stringify(report.step)}`);
+      output.log(`[CucumberJsonReporter] Adding ${file_path} to:\n ${JSON.stringify(report.step)}`);
       report.step.embeddings.push(screenshot);
     } catch (error) {
-      output.log(`[CucumberJsonReporter] Couldn't add ${filename} to:\n ${JSON.stringify(report.step)}`);
+      output.log(`[CucumberJsonReporter] Couldn't add ${file_path} to:\n ${JSON.stringify(report.step)}`);
     }
   }
 
@@ -342,4 +349,6 @@ module.exports = function (config) {
     output.log(`[CucumberJsonReporter] Adding comment "${step}" to:\n ${JSON.stringify(report.step)}`);
     report.step.embeddings.push(comment);
   }
+
+  return plugin;
 };
