@@ -1,3 +1,10 @@
+
+### 1.0.4
+
+- Addition of screenshotOnFail functionality (PR made to codeceptjs repo to in relation to this change) [PR #2888](https://github.com/codeceptjs/CodeceptJS/pull/2888)
+
+---
+
 ### 1.0.3
 
 - Addition of uniqueFileName (for parallel runs)
