@@ -20,6 +20,7 @@ const defaultConfig = {
   attachComments: true,
   outputFile: 'cucumber_output.json',
   uniqueFileNames: false,
+  includeExampleValues: false,
 };
 
 module.exports = function (config) {
@@ -202,12 +203,18 @@ module.exports = function (config) {
       const rowCells = row.cells;
       const outlineExample = {};
 
+      let outlineScenario = _.cloneDeep(reportScenarioObject);
       for (let i = 0; i < rowCells.length; i++) {
         const headerCell = headerCells[i].value;
         const rowCell = rowCells[i].value;
         outlineExample[headerCell] = rowCell;
+        // append actual value to example variable place holders in steps
+        if (config.includeExampleValues) {
+          const re = new RegExp(headerCell, 'g');
+          outlineScenario = JSON.parse(JSON.stringify(outlineScenario).replace(re, `${headerCell}:${rowCell}`));
+        }
       }
-      const outlineScenario = _.cloneDeep(reportScenarioObject);
+
       outlineScenario.name += ` ${JSON.stringify(outlineExample)}`;
       splitScenarios.push(outlineScenario);
     });

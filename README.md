@@ -33,7 +33,8 @@ plugins: {
       attachScreenshots: true,     // true by default
       attachComments: true,        // true by default
       outputFile: 'file.json',     // cucumber_output.json by default
-      uniqueFileNames: false       // if true outputFile is ignored in favor of unique file names in the format of `cucumber_output_<UUID>.json`.  Useful for parallel test execution
+      uniqueFileNames: false,      // if true outputFile is ignored in favor of unique file names in the format of `cucumber_output_<UUID>.json`.  Useful for parallel test execution
+      includeExampleValues: false  // if true incorporate actual values from Examples table along with variable placeholder when writing steps to the report
     },
 }
 ...
