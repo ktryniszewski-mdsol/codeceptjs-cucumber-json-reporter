@@ -1,3 +1,8 @@
+### 1.0.5
+
+- Enhancing output to include actual example variable values [PR #3](https://github.com/ktryniszewski-mdsol/codeceptjs-cucumber-json-reporter/pull/3)
+
+---
 
 ### 1.0.4
 
