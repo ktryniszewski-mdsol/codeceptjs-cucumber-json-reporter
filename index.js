@@ -21,6 +21,7 @@ const defaultConfig = {
   outputFile: 'cucumber_output.json',
   uniqueFileNames: false,
   includeExampleValues: false,
+  timeMultiplier: 1000000, // nanoseconds
 };
 
 module.exports = function (config) {
@@ -105,7 +106,7 @@ module.exports = function (config) {
       if (report && report.step) {
         report.step.end_time = Date.now();
         // calculate the duration in nanoseconds for cucumber-html-reporter
-        report.step.result.duration = (report.step.end_time - report.step.start_time) * 1000000;
+        report.step.result.duration = (report.step.end_time - report.step.start_time) * config.timeMultiplier;
       }
     });
   });
@@ -333,7 +334,7 @@ module.exports = function (config) {
     return rootStep;
   }
 
-  // Checks if step is actually BDD
+  // Checks if step is actually BDDconfig.includeExampleValues
   // Before-After Hooks aren't BDD and we want to exclude those from reporting pass/fail
   function isBDD(step) {
     const metaStep = getRootMetaStep(step);

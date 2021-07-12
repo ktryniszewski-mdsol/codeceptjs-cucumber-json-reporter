@@ -35,6 +35,8 @@ plugins: {
       outputFile: 'file.json',     // cucumber_output.json by default
       uniqueFileNames: false,      // if true outputFile is ignored in favor of unique file names in the format of `cucumber_output_<UUID>.json`.  Useful for parallel test execution
       includeExampleValues: false  // if true incorporate actual values from Examples table along with variable placeholder when writing steps to the report
+      timeMultiplier: 1000000,     // Used when calculating duration of individual BDD steps.  Defaults to nanoseconds
+};
     },
 }
 ...
