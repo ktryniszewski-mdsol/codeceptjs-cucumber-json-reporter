@@ -74,9 +74,6 @@ module.exports = function (config) {
   });
 
   event.dispatcher.on(event.step.finished, (step) => {
-    if (!isBDD(step)) return;
-    // calculate the duration in nanoseconds for cucumber-html-reporter
-    report.step.result.duration = (step.endTime - step.startTime) * 1000000;
     if (step.helperMethod === 'saveScreenshot') {
       const filePath = path.join(global.output_dir, step.args[0]);
       addScreenshotToReport(filePath);
@@ -91,6 +88,9 @@ module.exports = function (config) {
     recorder.add('Set step position', async () => {
       report.step = report.scenario.steps[report.stepPosition];
     });
+    recorder.add('Set step starting time', async () => {
+      if (report && report.step) report.step.start_time = Date.now();
+    });
   });
 
   event.dispatcher.on(event.bddStep.after, () => {
@@ -100,6 +100,13 @@ module.exports = function (config) {
       // if the bddStep had no helper methods it will never be updated to 'passed'
       // and if bddStep after event is emitted, it should have passed
       if (report.step.result.status === 'skipped') report.step.result.status = 'passed';
+    });
+    recorder.add('Set step end time and duration', async () => {
+      if (report && report.step) {
+        report.step.end_time = Date.now();
+        // calculate the duration in nanoseconds for cucumber-html-reporter
+        report.step.result.duration = (report.step.end_time - report.step.start_time) * 1000000;
+      }
     });
   });
 
