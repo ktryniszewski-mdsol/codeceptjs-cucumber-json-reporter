@@ -105,7 +105,7 @@ module.exports = function (config) {
     recorder.add('Set step end time and duration', async () => {
       if (report && report.step) {
         report.step.end_time = Date.now();
-        // calculate the duration in nanoseconds for cucumber-html-reporter
+        // calculate the duration based on config timeMultiplier for reporting tools
         report.step.result.duration = (report.step.end_time - report.step.start_time) * config.timeMultiplier;
       }
     });
@@ -334,7 +334,7 @@ module.exports = function (config) {
     return rootStep;
   }
 
-  // Checks if step is actually BDDconfig.includeExampleValues
+  // Checks if step is actually BDD
   // Before-After Hooks aren't BDD and we want to exclude those from reporting pass/fail
   function isBDD(step) {
     const metaStep = getRootMetaStep(step);
