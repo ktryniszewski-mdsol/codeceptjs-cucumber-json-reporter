@@ -21,6 +21,7 @@ const defaultConfig = {
   outputFile: 'cucumber_output.json',
   uniqueFileNames: false,
   includeExampleValues: false,
+  timeMultiplier: 1000000, // nanoseconds
 };
 
 module.exports = function (config) {
@@ -88,6 +89,9 @@ module.exports = function (config) {
     recorder.add('Set step position', async () => {
       report.step = report.scenario.steps[report.stepPosition];
     });
+    recorder.add('Set step starting time', async () => {
+      if (report && report.step) report.step.start_time = Date.now();
+    });
   });
 
   event.dispatcher.on(event.bddStep.after, () => {
@@ -97,6 +101,13 @@ module.exports = function (config) {
       // if the bddStep had no helper methods it will never be updated to 'passed'
       // and if bddStep after event is emitted, it should have passed
       if (report.step.result.status === 'skipped') report.step.result.status = 'passed';
+    });
+    recorder.add('Set step end time and duration', async () => {
+      if (report && report.step) {
+        report.step.end_time = Date.now();
+        // calculate the duration based on config timeMultiplier for reporting tools
+        report.step.result.duration = (report.step.end_time - report.step.start_time) * config.timeMultiplier;
+      }
     });
   });
 
