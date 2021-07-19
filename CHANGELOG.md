@@ -1,3 +1,9 @@
+### 1.0.6
+
+- Addition of step timing/duration added [PR #4](https://github.com/ktryniszewski-mdsol/codeceptjs-cucumber-json-reporter/pull/4)
+
+---
+
 ### 1.0.5
 
 - Enhancing output to include actual example variable values [PR #3](https://github.com/ktryniszewski-mdsol/codeceptjs-cucumber-json-reporter/pull/3)

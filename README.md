@@ -72,3 +72,12 @@ Use [cucumber-html-reporter](https://www.npmjs.com/package/cucumber-html-reporte
 ## Limitations
 
 - CodeceptJS treats BDD steps as metasteps. Therefore if your step definition does not contain any helper methods it only fires bddStep events which are limited in what information we can extract.
+
+
+---
+
+## Contributors
+
+Thanks to those who add features/fix bugs
+
+- [fijijavis](https://github.com/fijijavis)
