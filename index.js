@@ -232,7 +232,7 @@ module.exports = function (config) {
         outlineScenario.name += ` ${JSON.stringify(outlineExample)}`;
 
         // example tables can have tagging associated with them
-        outlineScenario.tags = example.tags;
+        if (example.tags.length > 0) { outlineScenario.tags = example.tags; }
         splitScenarios.push(outlineScenario);
       });
     });
