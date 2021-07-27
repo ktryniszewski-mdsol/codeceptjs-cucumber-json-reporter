@@ -1,3 +1,9 @@
+### 1.0.7
+
+- Fix to address multiple example tables in scenario outlines [PR #5](https://github.com/ktryniszewski-mdsol/codeceptjs-cucumber-json-reporter/pull/5)
+
+---
+
 ### 1.0.6
 
 - Addition of step timing/duration added [PR #4](https://github.com/ktryniszewski-mdsol/codeceptjs-cucumber-json-reporter/pull/4)
