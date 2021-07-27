@@ -206,28 +206,35 @@ module.exports = function (config) {
 
   function separateScenarioOutline(codeceptScenarioObject, reportScenarioObject) {
     const splitScenarios = [];
-    const examples = codeceptScenarioObject.examples[0];
-    const headerCells = examples.tableHeader.cells;
-    const bodyRows = examples.tableBody;
+    const { examples } = codeceptScenarioObject;
 
-    bodyRows.forEach((row) => {
-      const rowCells = row.cells;
-      const outlineExample = {};
+    // a given scenario outline can have multiple example tables
+    examples.forEach((example) => {
+      const headerCells = example.tableHeader.cells;
+      const bodyRows = example.tableBody;
 
-      let outlineScenario = _.cloneDeep(reportScenarioObject);
-      for (let i = 0; i < rowCells.length; i++) {
-        const headerCell = headerCells[i].value;
-        const rowCell = rowCells[i].value;
-        outlineExample[headerCell] = rowCell;
-        // append actual value to example variable place holders in steps
-        if (config.includeExampleValues) {
-          const re = new RegExp(headerCell, 'g');
-          outlineScenario = JSON.parse(JSON.stringify(outlineScenario).replace(re, `${headerCell}:${rowCell}`));
+      bodyRows.forEach((row) => {
+        const rowCells = row.cells;
+        const outlineExample = {};
+
+        let outlineScenario = _.cloneDeep(reportScenarioObject);
+        for (let i = 0; i < rowCells.length; i++) {
+          const headerCell = headerCells[i].value;
+          const rowCell = rowCells[i].value;
+          outlineExample[headerCell] = rowCell;
+          // append actual value to example variable place holders in steps
+          if (config.includeExampleValues) {
+            const re = new RegExp(headerCell, 'g');
+            outlineScenario = JSON.parse(JSON.stringify(outlineScenario).replace(re, `${headerCell}:${rowCell}`));
+          }
         }
-      }
 
-      outlineScenario.name += ` ${JSON.stringify(outlineExample)}`;
-      splitScenarios.push(outlineScenario);
+        outlineScenario.name += ` ${JSON.stringify(outlineExample)}`;
+
+        // example tables can have tagging associated with them
+        if (example.tags.length > 0) { outlineScenario.tags = example.tags; }
+        splitScenarios.push(outlineScenario);
+      });
     });
     return splitScenarios;
   }
