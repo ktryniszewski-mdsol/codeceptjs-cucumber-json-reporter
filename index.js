@@ -170,6 +170,7 @@ module.exports = function (config) {
         id: codeceptScenarioObject.name.replace(/ /g, '_').replace(/,/g, ''),
         keyword: codeceptScenarioObject.keyword,
         name: codeceptScenarioObject.name,
+        description: codeceptScenarioObject.description,
         type: 'scenario',
         line: codeceptScenarioObject.location.line,
         tags: [],
