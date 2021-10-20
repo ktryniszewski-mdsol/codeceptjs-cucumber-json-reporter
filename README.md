@@ -48,7 +48,7 @@ plugins: {
 When the plugin is installed and configured, run it as you would normally run any other CodeceptJS plugin:
 
 ```
-npx codeceptjs run --plugins cucumberReporter
+npx codeceptjs run --plugins cucumberJsonReporter
 ```
 
 The plugin parses the BDD feature file before the start of each feature and generates the report structure. Once the test starts, it uses event listeners to add runtime data such as step status (pass/fail), screenshot embeddings, comment embeddings, and errors.

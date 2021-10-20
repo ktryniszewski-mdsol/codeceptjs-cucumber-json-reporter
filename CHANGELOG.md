@@ -1,3 +1,9 @@
+### 1.0.8
+
+- Capture descriptions written at the Scenario / Scenario Outline Level [PR #6](https://github.com/ktryniszewski-mdsol/codeceptjs-cucumber-json-reporter/pull/6)
+
+---
+
 ### 1.0.7
 
 - Fix to address multiple example tables in scenario outlines [PR #5](https://github.com/ktryniszewski-mdsol/codeceptjs-cucumber-json-reporter/pull/5)
