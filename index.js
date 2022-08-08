@@ -225,8 +225,8 @@ module.exports = function (config) {
           outlineExample[headerCell] = rowCell;
           // append actual value to example variable place holders in steps
           if (config.includeExampleValues) {
-            const re = new RegExp(headerCell, 'g');
-            outlineScenario = JSON.parse(JSON.stringify(outlineScenario).replace(re, `${headerCell}:${rowCell}`));
+            const re = new RegExp(`<${headerCell}>`, 'g');
+            outlineScenario = JSON.parse(JSON.stringify(outlineScenario).replace(re, `<${headerCell}:${rowCell}>`));
           }
         }
 
