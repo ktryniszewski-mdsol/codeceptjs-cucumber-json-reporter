@@ -117,7 +117,9 @@ module.exports = function (config) {
     // since we parse the whole feature file at start
     removeNotExecutedScenarios();
 
-    const filename = config.uniqueFileNames ? `cucumber_output_${Math.floor(new Date().getTime() / 1000)}.json` : config.outputFile;
+    const filename = config.uniqueFileNames
+      ? `cucumber_output_${Math.floor(new Date().getTime() / 1000)}.json`
+      : config.outputFile;
 
     fs.writeFile(path.join(global.output_dir, filename), JSON.stringify(allFeatures, null, 2), (err) => {
       if (err) throw err;
@@ -164,7 +166,8 @@ module.exports = function (config) {
     let backgroundSteps = [];
 
     // get all scenarios
-    feature.children.forEach((codeceptScenarioObject) => {
+    feature.children.forEach((codeceptObject) => {
+      const codeceptScenarioObject = codeceptObject.scenario || codeceptObject;
       const reportScenarioObject = {
         executed: false,
         id: codeceptScenarioObject.name.replace(/ /g, '_').replace(/,/g, ''),

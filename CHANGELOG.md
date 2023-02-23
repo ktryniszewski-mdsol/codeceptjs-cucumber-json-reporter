@@ -1,3 +1,15 @@
+### 1.0.10
+
+- Fix reporter to work with Codeceptjs 3.4.0 Cucumber update
+
+---
+
+### 1.0.9
+
+- Fix Scenario Outline containing header cell string [PR #9](https://github.com/ktryniszewski-mdsol/codeceptjs-cucumber-json-reporter/pull/9)
+
+---
+
 ### 1.0.8
 
 - Capture descriptions written at the Scenario / Scenario Outline Level [PR #6](https://github.com/ktryniszewski-mdsol/codeceptjs-cucumber-json-reporter/pull/6)
