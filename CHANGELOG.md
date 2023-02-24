@@ -1,3 +1,9 @@
+### 1.0.11
+
+- More fixes for Codeceptjs >= 3.4.0
+
+---
+
 ### 1.0.10
 
 - Fix reporter to work with Codeceptjs 3.4.0 Cucumber update

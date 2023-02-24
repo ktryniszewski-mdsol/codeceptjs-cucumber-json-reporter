@@ -198,7 +198,7 @@ module.exports = function (config) {
       const clonedBackground = _.cloneDeep(backgroundSteps);
       reportScenarioObject.steps = [...clonedBackground, ...steps];
 
-      if (codeceptScenarioObject.examples === undefined) {
+      if (codeceptScenarioObject.examples === undefined || codeceptScenarioObject.examples.length === 0) {
         allScenarios.push(reportScenarioObject);
       } else {
         const separatedOutlines = separateScenarioOutline(codeceptScenarioObject, reportScenarioObject);
@@ -262,8 +262,25 @@ module.exports = function (config) {
         embeddings: [],
       };
 
+      // update to handle codecept >= 3.4.0
+      const buildArgument = () => {
+        let arg = null;
+        if (codeceptStepObject.docString) {
+          arg = {
+            type: 'DocString',
+            content: codeceptStepObject.docString.content,
+          };
+        }
+        if (codeceptStepObject.dataTable) {
+          arg = {
+            type: 'DataTable',
+            ...codeceptStepObject.dataTable,
+          };
+        }
+        return arg;
+      };
       // get all arguments for a step
-      const { argument } = codeceptStepObject;
+      const argument = codeceptStepObject.argument || buildArgument();
       if (argument) reportStep.arguments.push(getArgumentsFromCodecept(argument));
       allSteps.push(reportStep);
     });
