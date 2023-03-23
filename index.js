@@ -167,7 +167,7 @@ module.exports = function (config) {
 
     // get all scenarios
     feature.children.forEach((codeceptObject) => {
-      const codeceptScenarioObject = codeceptObject.scenario || codeceptObject;
+      const codeceptScenarioObject = codeceptObject.scenario || codeceptObject.background || codeceptObject;
       const reportScenarioObject = {
         executed: false,
         id: codeceptScenarioObject.name.replace(/ /g, '_').replace(/,/g, ''),
