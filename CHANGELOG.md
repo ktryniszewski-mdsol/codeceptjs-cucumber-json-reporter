@@ -1,3 +1,9 @@
+### 1.0.12
+
+- Fix for background usage in codecept v3.4.1 [PR #10](https://github.com/ktryniszewski-mdsol/codeceptjs-cucumber-json-reporter/pull/10)
+
+---
+
 ### 1.0.11
 
 - More fixes for Codeceptjs >= 3.4.0

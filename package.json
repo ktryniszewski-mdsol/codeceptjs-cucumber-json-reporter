@@ -1,6 +1,6 @@
 {
   "name": "codeceptjs-cucumber-json-reporter",
-  "version": "1.0.11",
+  "version": "1.0.12",
   "description": "CodeceptJS plugin to generate a cucumberjs json output",
   "main": "index.js",
   "scripts": {
