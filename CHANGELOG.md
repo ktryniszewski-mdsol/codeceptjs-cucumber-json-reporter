@@ -1,4 +1,11 @@
-### 1.0.13
+### 1.0.14
+
+- Accidently broke I.saveScreenshot calls saving to report, with the metaStep addition in 1.0.13. This fix allows both metaStep screenshot calls and the native codecept I.saveScreenshot to work with the report.
+
+---
+
+
+### 1.0.13 (deprecated)
 
 - Update after step hook to check metaStep for saveScreenshot call. [PR #11](https://github.com/ktryniszewski-mdsol/codeceptjs-cucumber-json-reporter/pull/11)
 
