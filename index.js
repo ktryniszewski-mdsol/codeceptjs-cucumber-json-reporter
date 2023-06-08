@@ -75,8 +75,8 @@ module.exports = function (config) {
   });
 
   event.dispatcher.on(event.step.finished, (step) => {
-    if (step.helperMethod === 'saveScreenshot') {
-      const filePath = path.join(global.output_dir, step.args[0]);
+    if (getRootMetaStep(step).helperMethod === 'saveScreenshot') {
+      const filePath = path.join(global.output_dir, getRootMetaStep(step).args[0]);
       addScreenshotToReport(filePath);
     }
   });
